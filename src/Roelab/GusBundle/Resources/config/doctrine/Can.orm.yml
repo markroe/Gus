@@ -1,0 +1,33 @@
+Roelab\GusBundle\Entity\Can:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: smallint
+        name:
+            type: string
+            length: 255
+    oneToMany:
+        emailcans:
+            targetEntity: Emailcan
+            mappedBy: can
+    oneToMany:
+        dlpcans:
+            targetEntity: Dlpcan
+            mappedBy: can
+    oneToMany:
+        webcans:
+            targetEntity: Webcan
+            mappedBy: can
+    oneToMany:
+        jobcans:
+            targetEntity: Jobcan
+            mappedBy: can
+    lifecycleCallbacks: {  }
+

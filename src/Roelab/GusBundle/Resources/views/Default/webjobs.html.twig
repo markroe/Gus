@@ -1,0 +1,17 @@
+ {% extends '::base.html.twig' %}
+
+ {% block content %}
+     Web Jobs!
+	<table border=1>
+		<tr>
+			<th>Action</th>
+			<th>Name</th>
+			<th>Schedule</th>
+		</tr>
+		{% for job in jobs %}
+			<tr><td><a href="editwebjob/{{ job.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a><a href="deletewebjob/{{ job.id }}"><img src={{ asset('bundles/roelabgus/images/delete.png') }}></a></td><td>{{ job.name }}</td><td>{{ job.schedule }}</td></tr>
+		{% endfor %}
+	</table>
+	<br>
+     {{ form(form) }}
+ {% endblock %}

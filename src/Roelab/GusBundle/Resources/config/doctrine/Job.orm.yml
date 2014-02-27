@@ -1,0 +1,24 @@
+Roelab\GusBundle\Entity\Job:
+    type: entity
+    table: null
+    repositoryClass: Roelab\GusBundle\Entity\JobRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: smallint
+        name:
+            type: string
+            length: 255
+        schedule:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    oneToMany:
+        jobcans:
+            targetEntity: Jobcan
+            mappedBy: job

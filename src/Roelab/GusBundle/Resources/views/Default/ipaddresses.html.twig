@@ -1,0 +1,19 @@
+ {% extends '::base.html.twig' %}
+
+ {% block content %}
+     IP Addresses!
+	<table border=1>
+		<tr>
+			<th>Action</th>
+			<th>Interface</th>
+			<th>Address</th>
+			<th>Netmask</th>
+			<th>Broadcast</th>
+		</tr>
+		{% for ip in table %}
+			<tr><td><a href="editip/{{ ip.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a> <a href="deleteip/{{ ip.id }}"><img src={{ asset('bundles/roelabgus/images/delete.png') }}></a></td><td>{{ ip.interface }}</td><td>{{ ip.address }}</td><td>{{ ip.netmask }}</td><td>{{ ip.broadcast }}</td></tr>
+		{% endfor %}
+	</table>
+	<br>
+     {{ form(form) }}
+ {% endblock %}

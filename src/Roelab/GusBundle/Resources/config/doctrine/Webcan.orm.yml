@@ -1,0 +1,22 @@
+Roelab\GusBundle\Entity\Webcan:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        url:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    manyToOne:
+        can:
+            targetEntity: Can
+            inversedBy: webcans
+            joinColumn:
+                name: can_id
+                referencedColumnName: id
+                onDelete: CASCADE

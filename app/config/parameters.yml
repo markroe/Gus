@@ -1,0 +1,16 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: gus
+    database_user: gus
+    database_password: BUjLq6ADzxQ7Nwea
+    mailer_transport: smtp
+    mailer_auth_mode: plain
+    mailer_host: sandbox49525.mailgun.org
+    mailer_user: postmaster@sandbox49525.mailgun.org
+    mailer_password: 75unvtiybjj3
+    locale: en
+    secret: 841887a179a1376e7b698030a4397bd7
+    database_path: null

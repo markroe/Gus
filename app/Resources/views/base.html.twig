@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Gus</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Simulator for Human Internet Traffic" />
+        <meta name="keywords" content=""/>
+	{% stylesheets 'bundles/roelabgus/css/*' output='css/styles.css' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+    </head>
+
+    <body>
+	{% javascripts '@RoelabGusBundle/Resources/public/js/*' %}
+    		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+		<div class="menu">
+			<h1 class="title"><a href="{{ path('_welcome') }}">Gus</a>: The Simulator for Human Internet Traffic</h1>
+			<ul id="sdt_menu" class="sdt_menu">
+				<li>
+					<a href="{{ path('web') }}">
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">Web</span>
+							<span class="sdt_descr"></span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="{{ path('webcans') }}">Cans</a>
+							<a href="{{ path('webjobs') }}">Jobs</a>
+					</div>
+				</li>
+				<li>
+					<a href="{{ path('email') }}">
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">Email</span>
+							<span class="sdt_descr"></span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="#">Websites</a>
+							<a href="#">Illustrations</a>
+							<a href="#">Photography</a>
+					</div>
+				</li>
+				<li>
+					<a href="{{ path('data') }}">
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">Data</span>
+							<span class="sdt_descr"></span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="#">Websites</a>
+							<a href="#">Illustrations</a>
+							<a href="#">Photography</a>
+					</div>
+				</li>
+				<li>
+					<a href="{{ path('schedule') }}">
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">Schedule</span>
+							<span class="sdt_descr"></span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="#">Websites</a>
+							<a href="#">Illustrations</a>
+							<a href="#">Photography</a>
+					</div>
+				</li>
+				<li>
+					<a href="{{ path('settings') }}">
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">Settings</span>
+							<span class="sdt_descr"></span>
+						</span>
+					</a>
+					<div class="sdt_box">
+						<a href="{{ path('general') }}">General</a>
+						<a href="{{ path('ipaddresses') }}">IP Addresses</a>
+						<a href="{{ path('clients') }}">Clients</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+        <div id="content" class="content">
+        {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

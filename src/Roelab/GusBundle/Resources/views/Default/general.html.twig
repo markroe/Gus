@@ -1,0 +1,13 @@
+ {% extends '::base.html.twig' %}
+
+ {% block content %}
+     General!
+	<br>
+	{{ form(form) }}
+	<table border=1>
+	<tr><th>Action</th><th>Setting</th><th>Value</th></tr>
+	{% for setting in table %}
+		<tr><td><a href="editgeneral/{{ setting.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a></td><td>{{ setting.description }}</td><td>{{ setting.value }}</td></tr>
+	{% endfor %}
+	</table>
+ {% endblock %}

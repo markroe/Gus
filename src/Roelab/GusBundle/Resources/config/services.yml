@@ -1,0 +1,11 @@
+parameters:
+#    roelab_gus.example.class: Roelab\GusBundle\Example
+
+services:
+#    roelab_gus.example:
+#        class: %roelab_gus.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    rolab_ugs.form.type.job:
+        class: Roelab\GusBundle\Form\Type\JobType
+        tags:
+            - { name: form.type, alias: job }

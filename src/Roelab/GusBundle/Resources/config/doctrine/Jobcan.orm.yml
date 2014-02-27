@@ -1,0 +1,32 @@
+Roelab\GusBundle\Entity\Jobcan:
+    type: entity
+    table: null
+    repositoryClass: Roelab\GusBundle\Entity\JobcanRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        jobId:
+            type: integer
+            column: job_id
+        canId:
+            type: integer
+            column: can_id
+    lifecycleCallbacks: {  }
+    manyToOne:
+        job:
+            targetEntity: Job
+            inversedBy: jobs
+            joinColumn:
+                name: job_id
+                referencedColumnName: id
+    manyToOne:
+        can:
+            targetEntity: Can
+            inversedBy: cans
+            joinColumn:
+                name: can_id
+                referencedColumnName: id

@@ -1,0 +1,24 @@
+Roelab\GusBundle\Entity\Ipaddress:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        interface:
+            type: string
+            length: '25'
+        address:
+            type: string
+            length: '15'
+            unique: true
+        netmask:
+            type: string
+            length: '15'
+        broadcast:
+            type: string
+            length: '15'
+    lifecycleCallbacks: {  }

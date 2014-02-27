@@ -1,0 +1,26 @@
+Roelab\GusBundle\Entity\Emailcan:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        subject:
+            type: string
+            length: 255
+        body:
+            type: text
+        attachment:
+            type: blob
+    lifecycleCallbacks: {  }
+    manyToOne:
+        can:
+            targetEntity: Can
+            inversedBy: emailcans
+            joinColumn:
+                name: can_id
+                referencedColumnName: id
+                onDelete: CASCADE

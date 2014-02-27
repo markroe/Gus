@@ -1,0 +1,63 @@
+_welcome:
+    path:     /
+    defaults: { _controller: RoelabGusBundle:Default:welcome }
+web:
+    path:     /web
+    defaults: { _controller: RoelabGusBundle:Default:web }
+webcans:
+    path:     /webcans
+    defaults: { _controller: RoelabGusBundle:Default:webcans }
+editwebcan:
+    path:     /editwebcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editwebcan }
+deletewebcan:
+    path:     /deletewebcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deletewebcan }
+webjobs:
+    path:     /webjobs
+    defaults: { _controller: RoelabGusBundle:Default:webjobs }
+editwebjob:
+    path:     /editwebjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editwebjob }
+deletewebjob:
+    path:     /deletewebjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deletewebjob }
+email:
+    path:     /email
+    defaults: { _controller: RoelabGusBundle:Default:email }
+data:
+    path:     /data
+    defaults: { _controller: RoelabGusBundle:Default:data }
+schedule:
+    path:     /schedule
+    defaults: { _controller: RoelabGusBundle:Default:schedule }
+settings:
+    path:     /settings
+    defaults: { _controller: RoelabGusBundle:Default:settings }
+general:
+    path:     /general
+    defaults: { _controller: RoelabGusBundle:Default:general }
+editgeneral:
+    path:     /editgeneral/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editgeneral }
+ipaddresses:
+    path:     /ipaddresses
+    defaults: { _controller: RoelabGusBundle:Default:ipaddresses }
+deleteip:
+    path:     /deleteip/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deleteip }
+editip:
+    path:     /editip/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editip }
+clients:
+    path:     /clients
+    defaults: { _controller: RoelabGusBundle:Default:clients }
+deleteclient:
+    path:     /deleteclient/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deleteclient }
+editclient:
+    path:     /editclient/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editclient }
+hello:
+    pattern:  /hello/{name}
+    defaults: { _controller: RoelabGusBundle:Default:hello }

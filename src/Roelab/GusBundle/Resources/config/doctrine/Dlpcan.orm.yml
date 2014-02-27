@@ -1,0 +1,24 @@
+Roelab\GusBundle\Entity\Dlpcan:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        url:
+            type: string
+            length: 255
+        content:
+            type: text
+    lifecycleCallbacks: {  }
+    manyToOne:
+        can:
+            targetEntity: Can
+            inversedBy: dlpcans
+            joinColumn:
+                name: can_id
+                referencedColumnName: id
+                onDelete: CASCADE

@@ -1,0 +1,22 @@
+ {% extends '::base.html.twig' %}
+
+ {% block content %}
+     Web Cans!
+	<table border=1>
+		<tr>
+			<th>Action</th>
+			<th>Name</th>
+		</tr>
+		{% for can in cans %}
+			<tr><td>
+			{% if can.id != 1 %}<a href="editwebcan/{{ can.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a><a href="deletewebcan/{{ can.id }}"><img src={{ asset('bundles/roelabgus/images/delete.png') }}></a>{% endif %}</td><td>{{ can.name }}</td></tr>
+		{% endfor %}
+	</table>
+	<br>
+     {{ form(form) }}
+    <table>
+        {% for webcan in webcans %}
+            <tr><td>{{ webcan.url }}</td></tr>
+        {% endfor %}
+    </table>
+ {% endblock %}

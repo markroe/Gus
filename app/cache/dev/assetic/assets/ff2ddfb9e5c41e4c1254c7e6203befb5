@@ -1,0 +1,226 @@
+body{
+	background:#0a2c48;
+	font-family:Arial;
+	width:850px;
+	margin:0 auto;
+}
+ul.sdt_menu{
+	margin-top:0px;
+}
+h1.title{
+	background:;
+	color:#fff;
+	height:15px;
+}
+div.menu{
+
+}
+#content{
+	background:#fff;
+	position:absolute;
+	top:122px;
+	width:839px;
+	height:1000px;
+	padding:5px;
+	z-index:0;
+}
+ul.sdt_menu{
+	margin:0;
+	padding:0;
+	list-style: none;
+	font-family:"Myriad Pro", "Trebuchet MS", sans-serif;
+	font-size:14px;
+	width:2020px;
+}
+ul.sdt_menu a{
+	text-decoration:none;
+	outline:none;
+}
+ul.sdt_menu li{
+	float:left;
+	width:170px;
+	height:65px;
+	position:relative;
+	cursor:pointer;
+}
+ul.sdt_menu li > a{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:170px;
+	height:65px;
+	z-index:120;
+	background:transparent url(../../bundles/roelabgus/images/overlay.png) no-repeat bottom right;
+	-moz-box-shadow:0px 0px 2px #000 inset;
+	-webkit-box-shadow:0px 0px 2px #000 inset;
+	box-shadow:0px 0px 2px #000 inset;
+}
+ul.sdt_menu li a img{
+	border:none;
+	position:absolute;
+	width:0px;
+	height:0px;
+	bottom:0px;
+	left:85px;
+	z-index:120;
+	-moz-box-shadow:0px 0px 4px #000;
+	-webkit-box-shadow:0px 0px 4px #000;
+	box-shadow:0px 0px 4px #000;
+}
+ul.sdt_menu li span.sdt_wrap{
+	position:absolute;
+	top:25px;
+	left:0px;
+	width:170px;
+	height:60px;
+	z-index:150;
+}
+ul.sdt_menu li span.sdt_active{
+	position:absolute;
+	background:#649ac8;
+	top:65px;
+	width:170px;
+	height:0px;
+	left:0px;
+	z-index:140;
+	-moz-box-shadow:0px 0px 4px #000 inset;
+	-webkit-box-shadow:0px 0px 4px #000 inset;
+	box-shadow:0px 0px 4px #000 inset;
+}
+ul.sdt_menu li span span.sdt_link,
+ul.sdt_menu li span span.sdt_descr,
+ul.sdt_menu li div.sdt_box a{
+	margin-left:15px;
+	text-transform:uppercase;
+	text-shadow:1px 1px 1px #0a2c48;
+}
+ul.sdt_menu li span span.sdt_link{
+	color:#fff;
+	font-size:20px;
+	float:left;
+	clear:both;
+}
+ul.sdt_menu li span span.sdt_descr{
+	color:#649ac8;
+	float:left;
+	clear:both;
+	width:155px; /*For dumbass IE7*/
+	font-size:10px;
+	letter-spacing:1px;
+}
+ul.sdt_menu li div.sdt_box{
+	display:block;
+	z-index: 140;
+	position:absolute;
+	width:170px;
+	overflow:hidden;
+	height:170px;
+	top:65px;
+	left:0px;
+	display:none;
+	background:#0a2c48;
+}
+ul.sdt_menu li div.sdt_box a{
+	float:left;
+	clear:both;
+	line-height:30px;
+	color:#649ac8;
+}
+ul.sdt_menu li div.sdt_box a:first-child{
+	margin-top:15px;
+}
+ul.sdt_menu li div.sdt_box a:hover{
+	color:#fff;
+}
+
+div.feedWidget{
+    z-index:-1;
+}
+div.activeTab{
+    z-index:-1;
+}
+#feedWidget{
+    background:url(../../bundles/roelabgus/css/bg.png) repeat-x #47525c;
+    border:2px solid #48535e;
+    margin:0 auto;
+    width:250px;
+    padding:5px;
+    position:absolute;
+
+    /* Remains hidden if JS is not enabled: */
+    display:none;
+    z-index:-1;
+}
+
+#activeTab.hover,.dropDownList{
+    background:url(../../bundles/roelabgus/css/drop_arrow.png) no-repeat 95% 50% #47525c;
+    border:1px solid #38434d;
+
+    margin:-1px;
+
+    cursor:pointer;
+
+    /* CSS3 round corners: */
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+
+}
+
+#activeTab,.dropDownList div{
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    margin:0 2px 0 0;
+    padding:5px;
+
+    text-shadow:0 1px 1px black;
+}
+
+.line{
+    height:1px;
+    overflow:hidden;
+    background-color:#2b353d;
+    border-bottom:1px solid #687581;
+    margin:10px 0;
+}
+
+.dropDownList{
+    background-image:none;
+    position:absolute;
+    border-top:none;
+    padding:5px;
+
+    /* We reset the roundness of the top corners, inherited by a previous rule: */
+
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.dropDownList div:hover{
+    background-color:#505e6b;
+}
+
+#tabContent div{
+    /* The feed entry divs */
+
+    background-color:#EEEEEE;
+    color:#555555;
+    font-size:10px;
+    margin-bottom:10px;
+    padding:5px;
+    position:relative;
+
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+
+    /* CSS3 box shadow: */
+    -moz-box-shadow:0 1px 1px black;
+    -webkit-box-shadow:0 1px 1px black;
+    box-shadow:0 1px 1px black;
+}

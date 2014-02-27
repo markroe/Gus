@@ -1,0 +1,4 @@
+roelab_gus:
+    resource: "@RoelabGusBundle/Resources/config/routing.yml"
+    prefix:   /
+
