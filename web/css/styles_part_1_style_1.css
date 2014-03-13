@@ -10,18 +10,19 @@ ul.sdt_menu{
 h1.title{
 	background:;
 	color:#fff;
-	width:633px;
 	height:15px;
 }
 div.menu{
 
 }
-div.content{
+#content{
 	background:#fff;
 	position:absolute;
 	top:122px;
-	width:850px;
-	height:1250px;
+	width:839px;
+	//height:1000px;
+	padding:5px;
+	z-index:0;
 }
 ul.sdt_menu{
 	margin:0;
@@ -48,8 +49,8 @@ ul.sdt_menu li > a{
 	left:0px;
 	width:170px;
 	height:65px;
-	z-index:12;
-	background:transparent url(../../bundles/roelabgus/images/overlay.png) no-repeat bottom right;
+	z-index:120;
+	background:transparent url(../bundles/roelabgus/images/overlay.png) no-repeat bottom right;
 	-moz-box-shadow:0px 0px 2px #000 inset;
 	-webkit-box-shadow:0px 0px 2px #000 inset;
 	box-shadow:0px 0px 2px #000 inset;
@@ -61,7 +62,7 @@ ul.sdt_menu li a img{
 	height:0px;
 	bottom:0px;
 	left:85px;
-	z-index:100;
+	z-index:120;
 	-moz-box-shadow:0px 0px 4px #000;
 	-webkit-box-shadow:0px 0px 4px #000;
 	box-shadow:0px 0px 4px #000;
@@ -72,7 +73,7 @@ ul.sdt_menu li span.sdt_wrap{
 	left:0px;
 	width:170px;
 	height:60px;
-	z-index:15;
+	z-index:150;
 }
 ul.sdt_menu li span.sdt_active{
 	position:absolute;
@@ -81,7 +82,7 @@ ul.sdt_menu li span.sdt_active{
 	width:170px;
 	height:0px;
 	left:0px;
-	z-index:14;
+	z-index:140;
 	-moz-box-shadow:0px 0px 4px #000 inset;
 	-webkit-box-shadow:0px 0px 4px #000 inset;
 	box-shadow:0px 0px 4px #000 inset;
@@ -109,7 +110,7 @@ ul.sdt_menu li span span.sdt_descr{
 }
 ul.sdt_menu li div.sdt_box{
 	display:block;
-	z-index: 1;
+	z-index: 140;
 	position:absolute;
 	width:170px;
 	overflow:hidden;
@@ -130,4 +131,96 @@ ul.sdt_menu li div.sdt_box a:first-child{
 }
 ul.sdt_menu li div.sdt_box a:hover{
 	color:#fff;
+}
+
+div.feedWidget{
+    z-index:0;
+}
+div.activeTab{
+    z-index:0;
+}
+#feedWidget{
+    background:url(../bundles/roelabgus/css/bg.png) repeat-x #47525c;
+    border:2px solid #48535e;
+    margin:0 auto;
+    width:250px;
+    padding:5px;
+    position:absolute;
+
+    /* Remains hidden if JS is not enabled: */
+    display:none;
+    z-index:0;
+}
+
+#activeTab.hover,.dropDownList{
+    background:url(../bundles/roelabgus/css/drop_arrow.png) no-repeat 95% 50% #47525c;
+    border:1px solid #38434d;
+
+    margin:-1px;
+
+    cursor:pointer;
+
+    /* CSS3 round corners: */
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+
+}
+
+#activeTab,.dropDownList div{
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    margin:0 2px 0 0;
+    padding:5px;
+
+    text-shadow:0 1px 1px black;
+}
+
+.line{
+    height:1px;
+    overflow:hidden;
+    background-color:#2b353d;
+    border-bottom:1px solid #687581;
+    margin:10px 0;
+}
+
+.dropDownList{
+    background-image:none;
+    position:absolute;
+    border-top:none;
+    padding:5px;
+
+    /* We reset the roundness of the top corners, inherited by a previous rule: */
+
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.dropDownList div:hover{
+    background-color:#505e6b;
+}
+
+#tabContent div{
+    /* The feed entry divs */
+
+    background-color:#EEEEEE;
+    color:#555555;
+    font-size:10px;
+    margin-bottom:10px;
+    padding:5px;
+    position:relative;
+
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+
+    /* CSS3 box shadow: */
+    -moz-box-shadow:0 1px 1px black;
+    -webkit-box-shadow:0 1px 1px black;
+    box-shadow:0 1px 1px black;
 }

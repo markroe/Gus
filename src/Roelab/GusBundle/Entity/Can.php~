@@ -13,11 +13,13 @@ class Can
 	protected $webcans;
 	protected $emailcans;
 	protected $dlpcans;
+    protected $jobcans;
 
 	public function __construct() {
 		$this->webcans = new ArrayCollection();
 		$this->emailcans = new ArrayCollection();
 		$this->dlpcans = new ArrayCollection();
+		$this->jobcans = new ArrayCollection();
 	}
 
     /**
@@ -156,5 +158,38 @@ class Can
     public function getWebcans()
     {
         return $this->webcans;
+    }
+
+    /**
+     * Add jobcans
+     *
+     * @param \Roelab\GusBundle\Entity\Jobcan $jobcans
+     * @return Can
+     */
+    public function addJobcan(\Roelab\GusBundle\Entity\Jobcan $jobcans)
+    {
+        $this->jobcans[] = $jobcans;
+
+        return $this;
+    }
+
+    /**
+     * Remove jobcans
+     *
+     * @param \Roelab\GusBundle\Entity\Jobcan $jobcans
+     */
+    public function removeJobcan(\Roelab\GusBundle\Entity\Jobcan $jobcans)
+    {
+        $this->jobcans->removeElement($jobcans);
+    }
+
+    /**
+     * Get jobcans
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJobcans()
+    {
+        return $this->jobcans;
     }
 }

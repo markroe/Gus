@@ -1,16 +1,16 @@
 /* Configuration: */
 
 var tabs = {
-    "CSO Data Protection": {
-        "feed"		: "http://www.csoonline.com/feed/topic/41193",
-        "function"	: rss
-    },
     "SANS": {
         "feed"		: "http://www.sans.org/newsletters/newsbites/rss/",
         "function"	: rss
     },
     "Ars Technica": {
         "feed"		: "http://feeds.arstechnica.com/arstechnica/security",
+        "function"	: rss
+    },
+    "Krebs on Security": {
+        "feed"		: "http://krebsonsecurity.com/feed/",
         "function"	: rss
     },
 }

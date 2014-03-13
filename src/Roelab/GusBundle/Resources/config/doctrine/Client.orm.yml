@@ -17,4 +17,7 @@ Roelab\GusBundle\Entity\Client:
         password:
             type: string
             length: 255
+        email:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

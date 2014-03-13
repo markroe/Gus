@@ -7,10 +7,11 @@
 			<th>Action</th>
 			<th>Username</th>
 			<th>Domain</th>
-			<th>Pssword</th>
+			<th>Password</th>
+			<th>Email</th>
 		</tr>
 		{% for client in table %}
-			<tr><td><a href="editclient/{{ client.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a> <a href="deleteclient/{{ client.id }}"><img src={{ asset('bundles/roelabgus/images/delete.png') }}></a></td><td>{{ client.username }}</td><td>{{ client.domain }}</td><td>{{ client.password }}</td></tr>
+			<tr><td><a href="editclient/{{ client.id }}"><img src={{ asset('bundles/roelabgus/images/edit.png') }}></a> <a href="deleteclient/{{ client.id }}"><img src={{ asset('bundles/roelabgus/images/delete.png') }}></a></td><td>{{ client.username }}</td><td>{{ client.domain }}</td><td>{{ client.password }}</td><td>{{ client.email }}</td></tr>
 		{% endfor %}
 	</table>
 	<br>

@@ -8,10 +8,7 @@ Roelab\GusBundle\Entity\Dlpcan:
             generator:
                 strategy: AUTO
     fields:
-        url:
-            type: string
-            length: 255
-        content:
+        data:
             type: text
     lifecycleCallbacks: {  }
     manyToOne:

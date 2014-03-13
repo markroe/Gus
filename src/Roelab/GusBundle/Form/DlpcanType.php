@@ -15,9 +15,9 @@ class DlpcanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url')
-            ->add('content')
-            ->add('can')
+            ->add('name','text')
+            ->add('data','textarea',array('attr' => array('cols' => '80', 'rows' => '20')))
+            ->add('save','submit');
         ;
     }
     
@@ -27,7 +27,9 @@ class DlpcanType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Roelab\GusBundle\Entity\Dlpcan'
+            //'data_class' => 'Roelab\GusBundle\Entity\Dlpcan'
+            'data_class' => null,
+            'cascade_validation' => true,
         ));
     }
 

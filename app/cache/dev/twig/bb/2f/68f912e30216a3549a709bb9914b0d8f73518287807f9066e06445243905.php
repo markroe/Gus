@@ -44,15 +44,18 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
         }
         unset($context["asset_url"]);
         // line 11
-        echo "    </head>
+        echo "        <link rel=\"shortcut icon\" href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/roelabgus/images/favicon.ico"), "html", null, true);
+        echo "\" />
+    </head>
 
     <body>
 \t";
-        // line 14
+        // line 15
         if (isset($context['assetic']['debug']) && $context['assetic']['debug']) {
             // asset "1aa6170_0"
             $context["asset_url"] = isset($context['assetic']['use_controller']) && $context['assetic']['use_controller'] ? $this->env->getExtension('routing')->getPath("_assetic_1aa6170_0") : $this->env->getExtension('assets')->getAssetUrl("_controller/js/1aa6170_part_1_jquery.min_1.js");
-            // line 15
+            // line 16
             echo "    \t\t<script type=\"text/javascript\" src=\"";
             echo twig_escape_filter($this->env, (isset($context["asset_url"]) ? $context["asset_url"] : $this->getContext($context, "asset_url")), "html", null, true);
             echo "\"></script>
@@ -84,16 +87,16 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t";
         }
         unset($context["asset_url"]);
-        // line 17
+        // line 18
         echo "\t\t<div class=\"menu\">
 \t\t\t<h1 class=\"title\"><a href=\"";
-        // line 18
+        // line 19
         echo $this->env->getExtension('routing')->getPath("_welcome");
         echo "\">Gus</a>: The Simulator for Human Internet Traffic</h1>
 \t\t\t<ul id=\"sdt_menu\" class=\"sdt_menu\">
 \t\t\t\t<li>
 \t\t\t\t\t<a href=\"";
-        // line 21
+        // line 22
         echo $this->env->getExtension('routing')->getPath("web");
         echo "\">
 \t\t\t\t\t\t<span class=\"sdt_active\"></span>
@@ -104,18 +107,18 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t\t\t\t\t</a>
 \t\t\t\t\t<div class=\"sdt_box\">
 \t\t\t\t\t\t\t<a href=\"";
-        // line 29
+        // line 30
         echo $this->env->getExtension('routing')->getPath("webcans");
         echo "\">Cans</a>
 \t\t\t\t\t\t\t<a href=\"";
-        // line 30
+        // line 31
         echo $this->env->getExtension('routing')->getPath("webjobs");
         echo "\">Jobs</a>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t\t<li>
 \t\t\t\t\t<a href=\"";
-        // line 34
+        // line 35
         echo $this->env->getExtension('routing')->getPath("email");
         echo "\">
 \t\t\t\t\t\t<span class=\"sdt_active\"></span>
@@ -125,9 +128,14 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t\t\t\t\t\t</span>
 \t\t\t\t\t</a>
 \t\t\t\t\t<div class=\"sdt_box\">
-\t\t\t\t\t\t\t<a href=\"#\">Websites</a>
-\t\t\t\t\t\t\t<a href=\"#\">Illustrations</a>
-\t\t\t\t\t\t\t<a href=\"#\">Photography</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 43
+        echo $this->env->getExtension('routing')->getPath("emailcans");
+        echo "\">Cans</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 44
+        echo $this->env->getExtension('routing')->getPath("emailjobs");
+        echo "\">Jobs</a>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t\t<li>
@@ -142,31 +150,45 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t\t\t\t\t\t</span>
 \t\t\t\t\t</a>
 \t\t\t\t\t<div class=\"sdt_box\">
-\t\t\t\t\t\t\t<a href=\"#\">Websites</a>
-\t\t\t\t\t\t\t<a href=\"#\">Illustrations</a>
-\t\t\t\t\t\t\t<a href=\"#\">Photography</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 56
+        echo $this->env->getExtension('routing')->getPath("dlpcans");
+        echo "\">Cans</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 57
+        echo $this->env->getExtension('routing')->getPath("dlpjobs");
+        echo "\">Jobs</a>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t\t<li>
 \t\t\t\t\t<a href=\"";
-        // line 62
-        echo $this->env->getExtension('routing')->getPath("schedule");
+        // line 61
+        echo $this->env->getExtension('routing')->getPath("status");
         echo "\">
 \t\t\t\t\t\t<span class=\"sdt_active\"></span>
 \t\t\t\t\t\t<span class=\"sdt_wrap\">
-\t\t\t\t\t\t\t<span class=\"sdt_link\">Schedule</span>
+\t\t\t\t\t\t\t<span class=\"sdt_link\">Status</span>
 \t\t\t\t\t\t\t<span class=\"sdt_descr\"></span>
 \t\t\t\t\t\t</span>
 \t\t\t\t\t</a>
 \t\t\t\t\t<div class=\"sdt_box\">
-\t\t\t\t\t\t\t<a href=\"#\">Websites</a>
-\t\t\t\t\t\t\t<a href=\"#\">Illustrations</a>
-\t\t\t\t\t\t\t<a href=\"#\">Photography</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 69
+        echo $this->env->getExtension('routing')->getPath("webstatus");
+        echo "\">Web</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 70
+        echo $this->env->getExtension('routing')->getPath("emailstatus");
+        echo "\">Email</a>
+\t\t\t\t\t\t\t<a href=\"";
+        // line 71
+        echo $this->env->getExtension('routing')->getPath("dlpstatus");
+        echo "\">DLP</a>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t\t<li>
 \t\t\t\t\t<a href=\"";
-        // line 76
+        // line 75
         echo $this->env->getExtension('routing')->getPath("settings");
         echo "\">
 \t\t\t\t\t\t<span class=\"sdt_active\"></span>
@@ -177,15 +199,15 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t\t\t\t\t</a>
 \t\t\t\t\t<div class=\"sdt_box\">
 \t\t\t\t\t\t<a href=\"";
-        // line 84
+        // line 83
         echo $this->env->getExtension('routing')->getPath("general");
         echo "\">General</a>
 \t\t\t\t\t\t<a href=\"";
-        // line 85
+        // line 84
         echo $this->env->getExtension('routing')->getPath("ipaddresses");
         echo "\">IP Addresses</a>
 \t\t\t\t\t\t<a href=\"";
-        // line 86
+        // line 85
         echo $this->env->getExtension('routing')->getPath("clients");
         echo "\">Clients</a>
 \t\t\t\t\t</div>
@@ -194,16 +216,16 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 \t\t</div>
         <div id=\"content\" class=\"content\">
         ";
-        // line 92
+        // line 91
         $this->displayBlock('content', $context, $blocks);
-        // line 93
+        // line 92
         echo "        </div>
     </body>
 </html>
 ";
     }
 
-    // line 92
+    // line 91
     public function block_content($context, array $blocks = array())
     {
     }
@@ -220,6 +242,6 @@ class __TwigTemplate_bb2f68f912e30216a3549a709bb9914b0d8f73518287807f9066e064452
 
     public function getDebugInfo()
     {
-        return array (  207 => 92,  200 => 93,  198 => 92,  189 => 86,  185 => 85,  181 => 84,  170 => 76,  153 => 62,  136 => 48,  119 => 34,  112 => 30,  108 => 29,  97 => 21,  91 => 18,  88 => 17,  56 => 15,  52 => 14,  47 => 11,  33 => 9,  29 => 8,  20 => 1,  31 => 4,  28 => 3,);
+        return array (  229 => 91,  222 => 92,  220 => 91,  211 => 85,  207 => 84,  203 => 83,  192 => 75,  185 => 71,  181 => 70,  177 => 69,  166 => 61,  159 => 57,  155 => 56,  144 => 48,  137 => 44,  133 => 43,  122 => 35,  115 => 31,  111 => 30,  100 => 22,  94 => 19,  91 => 18,  59 => 16,  55 => 15,  47 => 11,  33 => 9,  29 => 8,  20 => 1,  60 => 12,  45 => 10,  41 => 9,  35 => 6,  31 => 4,  28 => 3,);
     }
 }

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Jobcan
 {
     protected $job;
+    protected $can;
 
     /**
      * @var integer
@@ -104,5 +105,28 @@ class Jobcan
     public function getJob()
     {
         return $this->job;
+    }
+
+    /**
+     * Set can
+     *
+     * @param \Roelab\GusBundle\Entity\Can $can
+     * @return Jobcan
+     */
+    public function setCan(\Roelab\GusBundle\Entity\Can $can = null)
+    {
+        $this->can = $can;
+
+        return $this;
+    }
+
+    /**
+     * Get can
+     *
+     * @return \Roelab\GusBundle\Entity\Can 
+     */
+    public function getCan()
+    {
+        return $this->can;
     }
 }

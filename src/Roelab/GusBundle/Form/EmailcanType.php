@@ -15,11 +15,9 @@ class EmailcanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subject')
-            ->add('body')
-            ->add('attachment')
-            ->add('can')
-        ;
+            ->add('name','text')
+            ->add('emails','textarea',array('attr' => array('cols' => '80', 'rows' => '20')))
+            ->add('save','submit');
     }
     
     /**
@@ -28,7 +26,9 @@ class EmailcanType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Roelab\GusBundle\Entity\Emailcan'
+            //'data_class' => 'Roelab\GusBundle\Entity\Emailcan'
+            'data_class' => null,
+            'cascade_validation' => true,
         ));
     }
 

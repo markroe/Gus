@@ -72,29 +72,6 @@ class Job
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Job
-     */
-    public function setname($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getname()
-    {
-        return $this->name;
-    }
-
-    /**
      * Set schedule
      *
      * @param string $schedule
@@ -150,4 +127,27 @@ class Job
         return $this->jobcans;
     }
 
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Job
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

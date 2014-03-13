@@ -4,6 +4,7 @@ namespace Roelab\GusBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Roelab\GusBundle\Utility;
 use Roelab\GusBundle\Entity\Ipaddress;
 use Roelab\GusBundle\Entity\Client;
 use Roelab\GusBundle\Entity\Can;
@@ -12,14 +13,16 @@ use Roelab\GusBundle\Entity\Emailcan;
 use Roelab\GusBundle\Entity\Dlpcan;
 use Roelab\GusBundle\Entity\Job;
 use Roelab\GusBundle\Entity\Jobcan;
+use Roelab\GusBundle\Form\ClientType;
 use Roelab\GusBundle\Form\CanType;
 use Roelab\GusBundle\Form\WebcanType;
+use Roelab\GusBundle\Form\EmailcanType;
+use Roelab\GusBundle\Form\DlpcanType;
 use Roelab\GusBundle\Form\JobType;
-
+use Doctrine\ORM\EntityRepository;
 
 class DefaultController extends Controller
 {
-
 	public function welcomeAction() {
 		return $this->render('RoelabGusBundle:Default:index.html.twig');
 	}
@@ -32,21 +35,39 @@ class DefaultController extends Controller
 		$jobs = $this->getDoctrine()
 			->getRepository('RoelabGusBundle:Job')
 			->findByType(1);
-		$job = new Job();
-        /*
-        $cans = $this->getDoctrine()
-			->getRepository('RoelabGusBundle:Can')
-			->findByType(1);
-         */
-        $form = $this->createForm(new JobType(), $job);
+        $form = $this->createForm(new JobType())
+            ->add('cans', 'entity',array(
+                'class' => 'RoelabGusBundle:Can',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.type = 1')
+                        ->orderBy('u.name', 'ASC');
+                },
+                'property' => 'name',
+                'multiple' => 'true',
+                'expanded' => true,)
+            );
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
+            $data = $form->getData();
+		    $job = new Job();
 			$job->setType('1');
+            $job->setSchedule($data['schedule']);
+            $job->setName($data['name']);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($job);
 			$em->flush();
-		 
+            foreach ($data['cans'] as $can) {
+                $jobcan = new Jobcan();
+                $jobcan->setJobId($job->getId());
+                $jobcan->setCan($can);
+			    $em->persist($jobcan);
+            }
+			$em->flush();
+		    $cmd = $job->getSchedule()." /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/web.php ".$job->getId()." 2>&1\n";
+            $ut = new Utility();
+		    $ut->addToCron($cmd);
 			return $this->redirect($this->generateUrl('webjobs'));
 		}
         $job = new Job();
@@ -82,8 +103,11 @@ class DefaultController extends Controller
 		if (!$job) {
 			throw $this->createNotFoundException('Nothing found for id '.$id);
 		} else {
+		    $pattern = "/(web.php ".$job->getId().")/im";
 			$em->remove($job);
 			$em->flush();
+            $ut = new Utility();
+            $ut->deleteFromCron($pattern);
 		}
 		return $this->redirect($this->generateUrl('webjobs'));
 	}
@@ -141,7 +165,7 @@ class DefaultController extends Controller
 		}
 		$cans = $this->getDoctrine()
 			->getRepository('RoelabGusBundle:Can')
-			->findAll();
+			->findByType('2');
 		return $this->render('RoelabGusBundle:Default:webcans.html.twig', array('form' => $form->createView(), 'cans' => $cans, 'webcans' => $webcans));
 	}
 
@@ -152,11 +176,6 @@ class DefaultController extends Controller
 		if (!$can) {
 			throw $this->createNotFoundException('Nothing found for id '.$id);
 		} else {
-            //$em2 = $this->getDoctrine()->getManager();
-            //$webcan = new Webcan();
-            //$webcan->setCan($can);
-            //$em2->remove($webcan);
-            //$em2->flush();
 			$em->remove($can);
 			$em->flush();
 		}
@@ -167,8 +186,308 @@ class DefaultController extends Controller
 		return $this->render('RoelabGusBundle:Default:email.html.twig');
 	}
 
+	public function emailjobsAction(Request $request) {
+		$jobs = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Job')
+			->findByType(2);
+        $form = $this->createForm(new JobType())
+            ->add('cans', 'entity',array(
+                'class' => 'RoelabGusBundle:Can',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.type = 2')
+                        ->orderBy('u.name', 'ASC');
+                },
+                'property' => 'name',
+                'multiple' => 'true',
+                'expanded' => true,)
+            );
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+            $data = $form->getData();
+		    $job = new Job();
+			$job->setType('2');
+            $job->setSchedule($data['schedule']);
+            $job->setName($data['name']);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($job);
+			$em->flush();
+            foreach ($data['cans'] as $can) {
+                $jobcan = new Jobcan();
+                $jobcan->setJobId($job->getId());
+                $jobcan->setCan($can);
+			    $em->persist($jobcan);
+            }
+			$em->flush();
+		    $cmd = $job->getSchedule()." /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/email.php ".$job->getId()." 2>&1\n";
+            $ut = new Utility();
+		    $ut->addToCron($cmd);
+			return $this->redirect($this->generateUrl('emailjobs'));
+		}
+        $job = new Job();
+		return $this->render('RoelabGusBundle:Default:emailjobs.html.twig', array('form' => $form->createView(), 'jobs' => $jobs));
+	}
+
+	public function editemailjobAction($id, Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$job = $em->getRepository('RoelabGusBundle:Job')->find($id);
+
+		if (!$job) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+		    $form = $this->createForm(new JobType(), $job);
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($job);
+				$em->flush();
+				return $this->redirect($this->generateUrl('emailjobs'));
+			}
+		}
+		$jobs = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Job')
+			->findByType(2);
+		return $this->render('RoelabGusBundle:Default:emailjobs.html.twig', array('form' => $form->createView(), 'jobs' => $jobs));
+	}
+
+	public function deleteemailjobAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		$job = $em->getRepository('RoelabGusBundle:Job')->find($id);
+
+		if (!$job) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+		    $pattern = "/(email.php ".$job->getId().")/im";
+			$em->remove($job);
+			$em->flush();
+            $ut = new Utility();
+            $ut->deleteFromCron($pattern);
+		}
+		return $this->redirect($this->generateUrl('emailjobs'));
+	}
+
+	public function emailcansAction(Request $request) {
+		$cans = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Can')
+			->findByType(2);
+		$form = $this->createForm(new EmailcanType());
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$data = $form->getData();
+			$can = new Can();
+			$can->setName($data['name']);
+			$can->setType('2');
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($can);
+			$em->flush();
+			foreach (explode("\n",$data['url']) as $url) {
+				$emailcan = new Emailcan();
+				$emailcan->setUrl($url);
+				$emailcan->setCan($can);
+				$em2 = $this->getDoctrine()->getManager();
+				$em2->persist($emailcan);
+			}
+			$em2->flush();
+		 
+			return $this->redirect($this->generateUrl('emailcans'));
+		}
+        $emailcans = new Emailcan();
+		return $this->render('RoelabGusBundle:Default:emailcans.html.twig', array('form' => $form->createView(), 'cans' => $cans, 'emailcans' => $emailcans));
+	}
+
+	public function editemailcanAction($id, Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$can = $em->getRepository('RoelabGusBundle:Can')->find($id);
+
+		if (!$can) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+			$form = $this->createFormBuilder($can)
+				->add('name','text')
+				->add('type','hidden',array('data' => '2'))
+				->add('save','submit')
+				->getForm();
+            $emailcans = $can->getEmailcans();
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($can);
+				$em->flush();
+				return $this->redirect($this->generateUrl('emailcans'));
+			}
+		}
+		$cans = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Can')
+			->findAll();
+		return $this->render('RoelabGusBundle:Default:emailcans.html.twig', array('form' => $form->createView(), 'cans' => $cans, 'emailcans' => $emailcans));
+	}
+
+	public function deleteemailcanAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		$can = $em->getRepository('RoelabGusBundle:Can')->find($id);
+
+		if (!$can) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+			$em->remove($can);
+			$em->flush();
+		}
+		return $this->redirect($this->generateUrl('emailcans'));
+	}
+
 	public function dataAction() {
 		return $this->render('RoelabGusBundle:Default:data.html.twig');
+	}
+
+	public function dlpjobsAction(Request $request) {
+		$jobs = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Job')
+			->findByType(3);
+        $form = $this->createForm(new JobType())
+            ->add('cans', 'entity',array(
+                'class' => 'RoelabGusBundle:Can',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.type = 3')
+                        ->orderBy('u.name', 'ASC');
+                },
+                'property' => 'name',
+                'multiple' => 'true',
+                'expanded' => true,)
+            );
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+            $data = $form->getData();
+		    $job = new Job();
+			$job->setType('3');
+            $job->setSchedule($data['schedule']);
+            $job->setName($data['name']);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($job);
+			$em->flush();
+            foreach ($data['cans'] as $can) {
+                $jobcan = new Jobcan();
+                $jobcan->setJobId($job->getId());
+                $jobcan->setCan($can);
+			    $em->persist($jobcan);
+            }
+			$em->flush();
+		    $cmd = $job->getSchedule()." /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/dlp.php ".$job->getId()." 2>&1\n";
+            $ut = new Utility();
+		    $ut->addToCron($cmd);
+			return $this->redirect($this->generateUrl('dlpjobs'));
+		}
+        $job = new Job();
+		return $this->render('RoelabGusBundle:Default:dlpjobs.html.twig', array('form' => $form->createView(), 'jobs' => $jobs));
+	}
+
+	public function editdlpjobAction($id, Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$job = $em->getRepository('RoelabGusBundle:Job')->find($id);
+
+		if (!$job) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+		    $form = $this->createForm(new JobType(), $job);
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($job);
+				$em->flush();
+				return $this->redirect($this->generateUrl('dlpjobs'));
+			}
+		}
+		$jobs = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Job')
+			->findByType(3);
+		return $this->render('RoelabGusBundle:Default:dlpjobs.html.twig', array('form' => $form->createView(), 'jobs' => $jobs));
+	}
+
+	public function deletedlpjobAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		$job = $em->getRepository('RoelabGusBundle:Job')->find($id);
+
+		if (!$job) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+		    $pattern = "/(dlp.php ".$job->getId().")/im";
+			$em->remove($job);
+			$em->flush();
+            $ut = new Utility();
+            $ut->deleteFromCron($pattern);
+		}
+		return $this->redirect($this->generateUrl('dlpjobs'));
+	}
+
+	public function dlpcansAction(Request $request) {
+		$cans = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Can')
+			->findByType(3);
+		$form = $this->createForm(new DlpcanType());
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$data = $form->getData();
+			$can = new Can();
+			$can->setName($data['name']);
+			$can->setType('3');
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($can);
+			$em->flush();
+            $dlpcan = new Dlpcan();
+            $dlpcan->setCan($can);
+            $dlpcan->setData($data['data']);
+			$em2 = $this->getDoctrine()->getManager();
+			$em2->persist($dlpcan);
+			$em2->flush();
+		 
+			return $this->redirect($this->generateUrl('dlpcans'));
+		}
+        $dlpcans = new Dlpcan();
+		return $this->render('RoelabGusBundle:Default:dlpcans.html.twig', array('form' => $form->createView(), 'cans' => $cans, 'dlpcans' => $dlpcans));
+	}
+
+	public function editdlpcanAction($id, Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$can = $em->getRepository('RoelabGusBundle:Can')->find($id);
+
+		if (!$can) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+			$form = $this->createFormBuilder($can)
+				->add('name','text')
+				->add('type','hidden',array('data' => '3'))
+				->add('save','submit')
+				->getForm();
+            $dlpcans = $can->getDlpcans();
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($can);
+				$em->flush();
+				return $this->redirect($this->generateUrl('dlpcans'));
+			}
+		}
+		$cans = $this->getDoctrine()
+			->getRepository('RoelabGusBundle:Can')
+			->findByType('3');
+		return $this->render('RoelabGusBundle:Default:dlpcans.html.twig', array('form' => $form->createView(), 'cans' => $cans, 'dlpcans' => $dlpcans));
+	}
+
+	public function deletedlpcanAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		$can = $em->getRepository('RoelabGusBundle:Can')->find($id);
+
+		if (!$can) {
+			throw $this->createNotFoundException('Nothing found for id '.$id);
+		} else {
+			$em->remove($can);
+			$em->flush();
+		}
+		return $this->redirect($this->generateUrl('dlpcans'));
 	}
 
 	public function scheduleAction() {
@@ -204,24 +523,14 @@ class DefaultController extends Controller
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($general);
 				$em->flush();
-                $output = shell_exec('crontab -l');
-                $lines = explode("\n", $output);
-                $pattern = '/(alexa.php)/im';
-                $rows = array();
-                //foreach ($lines as $key => $value) {
-                foreach ($lines as &$value) {
-                    if (!preg_match($pattern,$value)) {
-                        $rows[] = $value;
-                    }
-                }
-                array_pop($rows);
+                $ut = new Utility();
                 if ($general->getName() == "alexadownload" and $general->getValue() > 0) {
-                    $rows[] = "0 23 * * * /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/alexa.php 2>&1\n";
+                    $cmd = "0 23 * * * /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/alexa.php 2>&1\n";
+                    $ut->addToCron($cmd);
                 } else {
-                    $rows[] = "#0 23 * * * /usr/bin/php /var/www/src/Roelab/GusBundle/Resources/scripts/alexa.php 2>&1\n";
+                    $pattern = '/(alexa.php)/im';
+                    $ut->deleteFromCron($pattern);
                 }
-                file_put_contents('/tmp/crontab.txt',implode("\n", $rows));
-                exec('crontab /tmp/crontab.txt');
 				return $this->redirect($this->generateUrl('general'));
 			}
 		}
@@ -329,12 +638,15 @@ class DefaultController extends Controller
 
 	public function clientsAction(Request $request) {
 		$client = new Client();
+        $form = $this->createForm(new ClientType(), $client);
+        /*
 		$form = $this->createFormBuilder($client)
 			->add('username','text')
 			->add('domain','text')
 			->add('password','text')
 			->add('save','submit')
 			->getForm();
+         */
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -357,12 +669,15 @@ class DefaultController extends Controller
 		if (!$client) {
 			throw $this->createNotFoundException('Nothing found for id '.$id);
 		} else {
+		    $form = $this->createForm(new ClientType(), $client);
+            /*
 			$form = $this->createFormBuilder($client)
 				->add('username','text')
 				->add('domain','text')
 				->add('password','text')
 				->add('save','submit')
 				->getForm();
+             */
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
@@ -393,4 +708,5 @@ class DefaultController extends Controller
 	public function helloAction($name) {
 		return $this->render('RoelabGusBundle:Default:hello.html.twig', array('name' => $name));
 	}
+
 }

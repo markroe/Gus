@@ -19,7 +19,7 @@ class JobType extends AbstractType
         $builder
             ->add('name','text')
             ->add('schedule','text')
-            ->add('jobcans', 'entity',array(
+            ->add('cans', 'entity',array(
                 'class' => 'RoelabGusBundle:Can',
                 'property' => 'name',
                 'multiple' => 'true',
@@ -34,8 +34,8 @@ class JobType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Roelab\GusBundle\Entity\Job'
-            //'data_class' => null,
+            //'data_class' => 'Roelab\GusBundle\Entity\Job'
+            'data_class' => null,
             //'cascade_validation' => true,
         ));
     }

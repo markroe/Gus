@@ -226,27 +226,114 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'deletewebjob')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::deletewebjobAction',));
         }
 
-        // email
-        if ($pathinfo === '/email') {
-            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::emailAction',  '_route' => 'email',);
-        }
+        if (0 === strpos($pathinfo, '/e')) {
+            if (0 === strpos($pathinfo, '/email')) {
+                // email
+                if ($pathinfo === '/email') {
+                    return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::emailAction',  '_route' => 'email',);
+                }
 
-        // data
-        if ($pathinfo === '/data') {
-            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::dataAction',  '_route' => 'data',);
-        }
+                // emailcans
+                if ($pathinfo === '/emailcans') {
+                    return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::emailcansAction',  '_route' => 'emailcans',);
+                }
 
-        if (0 === strpos($pathinfo, '/s')) {
-            // schedule
-            if ($pathinfo === '/schedule') {
-                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::scheduleAction',  '_route' => 'schedule',);
             }
 
-            // settings
-            if ($pathinfo === '/settings') {
-                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::settingsAction',  '_route' => 'settings',);
+            // editemailcan
+            if (0 === strpos($pathinfo, '/editemailcan') && preg_match('#^/editemailcan/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'editemailcan')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::editemailcanAction',));
             }
 
+        }
+
+        // deleteemailcan
+        if (0 === strpos($pathinfo, '/deleteemailcan') && preg_match('#^/deleteemailcan/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'deleteemailcan')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::deleteemailcanAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/e')) {
+            // emailjobs
+            if ($pathinfo === '/emailjobs') {
+                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::emailjobsAction',  '_route' => 'emailjobs',);
+            }
+
+            // editemailjob
+            if (0 === strpos($pathinfo, '/editemailjob') && preg_match('#^/editemailjob/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'editemailjob')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::editemailjobAction',));
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/d')) {
+            // deleteemailjob
+            if (0 === strpos($pathinfo, '/deleteemailjob') && preg_match('#^/deleteemailjob/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'deleteemailjob')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::deleteemailjobAction',));
+            }
+
+            // data
+            if ($pathinfo === '/data') {
+                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::dataAction',  '_route' => 'data',);
+            }
+
+            // dlpcans
+            if ($pathinfo === '/dlpcans') {
+                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::dlpcansAction',  '_route' => 'dlpcans',);
+            }
+
+        }
+
+        // editdlpcan
+        if (0 === strpos($pathinfo, '/editdlpcan') && preg_match('#^/editdlpcan/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'editdlpcan')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::editdlpcanAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/d')) {
+            // deletedlpcan
+            if (0 === strpos($pathinfo, '/deletedlpcan') && preg_match('#^/deletedlpcan/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'deletedlpcan')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::deletedlpcanAction',));
+            }
+
+            // dlpjobs
+            if ($pathinfo === '/dlpjobs') {
+                return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::dlpjobsAction',  '_route' => 'dlpjobs',);
+            }
+
+        }
+
+        // editdlpjob
+        if (0 === strpos($pathinfo, '/editdlpjob') && preg_match('#^/editdlpjob/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'editdlpjob')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::editdlpjobAction',));
+        }
+
+        // deletedlpjob
+        if (0 === strpos($pathinfo, '/deletedlpjob') && preg_match('#^/deletedlpjob/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'deletedlpjob')), array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::deletedlpjobAction',));
+        }
+
+        // status
+        if ($pathinfo === '/status') {
+            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::statusAction',  '_route' => 'status',);
+        }
+
+        // webstatus
+        if ($pathinfo === '/webstatus') {
+            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::webstatusAction',  '_route' => 'webstatus',);
+        }
+
+        // emailstatus
+        if ($pathinfo === '/emailstatus') {
+            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::emailstatusAction',  '_route' => 'emailstatus',);
+        }
+
+        // dlpstatus
+        if ($pathinfo === '/dlpstatus') {
+            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::dlpstatusAction',  '_route' => 'dlpstatus',);
+        }
+
+        // settings
+        if ($pathinfo === '/settings') {
+            return array (  '_controller' => 'Roelab\\GusBundle\\Controller\\DefaultController::settingsAction',  '_route' => 'settings',);
         }
 
         // general

@@ -8,6 +8,7 @@
 	{% stylesheets 'bundles/roelabgus/css/*' output='css/styles.css' filter='cssrewrite' %}
 		<link rel="stylesheet" href="{{ asset_url }}" />
 	{% endstylesheets %}
+        <link rel="shortcut icon" href="{{ asset('bundles/roelabgus/images/favicon.ico') }}" />
     </head>
 
     <body>
@@ -39,9 +40,8 @@
 						</span>
 					</a>
 					<div class="sdt_box">
-							<a href="#">Websites</a>
-							<a href="#">Illustrations</a>
-							<a href="#">Photography</a>
+							<a href="{{ path('emailcans') }}">Cans</a>
+							<a href="{{ path('emailjobs') }}">Jobs</a>
 					</div>
 				</li>
 				<li>
@@ -53,23 +53,22 @@
 						</span>
 					</a>
 					<div class="sdt_box">
-							<a href="#">Websites</a>
-							<a href="#">Illustrations</a>
-							<a href="#">Photography</a>
+							<a href="{{ path('dlpcans') }}">Cans</a>
+							<a href="{{ path('dlpjobs') }}">Jobs</a>
 					</div>
 				</li>
 				<li>
-					<a href="{{ path('schedule') }}">
+					<a href="{{ path('status') }}">
 						<span class="sdt_active"></span>
 						<span class="sdt_wrap">
-							<span class="sdt_link">Schedule</span>
+							<span class="sdt_link">Status</span>
 							<span class="sdt_descr"></span>
 						</span>
 					</a>
 					<div class="sdt_box">
-							<a href="#">Websites</a>
-							<a href="#">Illustrations</a>
-							<a href="#">Photography</a>
+							<a href="{{ path('webstatus') }}">Web</a>
+							<a href="{{ path('emailstatus') }}">Email</a>
+							<a href="{{ path('dlpstatus') }}">DLP</a>
 					</div>
 				</li>
 				<li>

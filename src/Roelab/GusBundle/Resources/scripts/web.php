@@ -1,30 +1,40 @@
 <?php
-    $jobid = $argv[1];
-    echo $jobid;
+    require_once('funcs.php');
     /*
-	$link = mysqli_connect("127.0.0.1","gus","BUjLq6ADzxQ7Nwea","gus");
-    file_put_contents("/tmp/alexa.zip", fopen("http://s3.amazonaws.com/alexa-static/top-1m.csv.zip", 'r'));
-    system('unzip -d /tmp /tmp/alexa.zip',$retval);
-    $handle = fopen("/tmp/top-1m.csv", "r");
-	$sql = "delete from Webcan where can_id = '1'";
-	$result = $link->query($sql);
-	$sql = "select value from General where name = 'alexatopn'";
-	$result = $link->query($sql);
-	$row = mysqli_fetch_array($result);
-    if ($handle) {
-        $data = array();
-        for ($i=1; $i <= $row['value']; $i++) {
-            $line = fgets($handle);
-            list($rank,$url) = split(',',$line);
-            $url = preg_replace('/\s+/', '', $url);
-            $data[] = '("1","'.$url.'")';
+    class Browser extends Thread {
+        public function run() {
         }
     }
-    $sql = "insert into Webcan (can_id,url) values " . implode(',',$data);
-    echo $sql;
-    $result = $link->query($sql);
+    $browser = new Browser();
+    var_dump($browser->start());
+    */
+    $jobid = $argv[1];
+	$link = dbConnect();
+    $proxy = getProxy($link);
+    $clients = getClients($link);
+    $urls = getUrls($link, $jobid);
+    $ips = getIps($link);
     mysqli_close($link);
-    system('rm -f /tmp/alexa.zip',$retval);
-    system('rm -f /tmp/top-1m.csv',$retval);
-     */
+
+    $userAgent = "IE 7 - Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30)";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
+    curl_setopt($ch, CURLOPT_REFERER, "http://www.roelab.com");
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,20); 
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    $clientcount = count($clients);
+    $ipcount = count($ips);
+    foreach ($urls as $url) {
+        $randclient = rand(0, $clientcount - 1);
+        $randip = rand(0, $ipcount - 1);
+        curl_setopt($ch, CURLOPT_PROXYUSERPWD, $clients[$randclient]['username'] . ":" . $clients[$randclient]['password']);
+        curl_setopt($ch, CURLOPT_INTERFACE, $ips[$randip]);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_exec($ch);
+    }
+    curl_close($ch);
+
 ?>

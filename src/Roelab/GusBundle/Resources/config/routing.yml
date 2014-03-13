@@ -22,15 +22,64 @@ editwebjob:
 deletewebjob:
     path:     /deletewebjob/{id}
     defaults: { _controller: RoelabGusBundle:Default:deletewebjob }
+
 email:
     path:     /email
     defaults: { _controller: RoelabGusBundle:Default:email }
+emailcans:
+    path:     /emailcans
+    defaults: { _controller: RoelabGusBundle:Default:emailcans }
+editemailcan:
+    path:     /editemailcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editemailcan }
+deleteemailcan:
+    path:     /deleteemailcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deleteemailcan }
+emailjobs:
+    path:     /emailjobs
+    defaults: { _controller: RoelabGusBundle:Default:emailjobs }
+editemailjob:
+    path:     /editemailjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editemailjob }
+deleteemailjob:
+    path:     /deleteemailjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deleteemailjob }
+
 data:
     path:     /data
     defaults: { _controller: RoelabGusBundle:Default:data }
-schedule:
-    path:     /schedule
-    defaults: { _controller: RoelabGusBundle:Default:schedule }
+dlpcans:
+    path:     /dlpcans
+    defaults: { _controller: RoelabGusBundle:Default:dlpcans }
+editdlpcan:
+    path:     /editdlpcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editdlpcan }
+deletedlpcan:
+    path:     /deletedlpcan/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deletedlpcan }
+dlpjobs:
+    path:     /dlpjobs
+    defaults: { _controller: RoelabGusBundle:Default:dlpjobs }
+editdlpjob:
+    path:     /editdlpjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:editdlpjob }
+deletedlpjob:
+    path:     /deletedlpjob/{id}
+    defaults: { _controller: RoelabGusBundle:Default:deletedlpjob }
+
+status:
+    path:     /status
+    defaults: { _controller: RoelabGusBundle:Default:status }
+webstatus:
+    path:     /webstatus
+    defaults: { _controller: RoelabGusBundle:Default:webstatus }
+emailstatus:
+    path:     /emailstatus
+    defaults: { _controller: RoelabGusBundle:Default:emailstatus }
+dlpstatus:
+    path:     /dlpstatus
+    defaults: { _controller: RoelabGusBundle:Default:dlpstatus }
+
 settings:
     path:     /settings
     defaults: { _controller: RoelabGusBundle:Default:settings }

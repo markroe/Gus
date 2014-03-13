@@ -13,5 +13,6 @@
 		{% endfor %}
 	</table>
 	<br>
-     {{ form(form) }}
+    {% form_theme form 'RoelabGusBundle:Form:fields.html.twig' %}
+    {{ form(form) }}
  {% endblock %}

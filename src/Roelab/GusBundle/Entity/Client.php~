@@ -29,7 +29,6 @@ class Client
      */
     private $password;
 
-
     /**
      * Get id
      *
@@ -107,5 +106,34 @@ class Client
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @var string
+     */
+    private $email;
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Client
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

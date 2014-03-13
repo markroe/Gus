@@ -62,8 +62,11 @@ class __TwigTemplate_90f0fbfc3b82dbdc0630f8101c6848170fae6e2627a285df8d6368f6dd2
         // line 14
         echo "\t</table>
 \t<br>
-     ";
+    ";
         // line 16
+        $this->env->getExtension('form')->renderer->setTheme((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), array(0 => "RoelabGusBundle:Form:fields.html.twig"));
+        // line 17
+        echo "    ";
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
         echo "
  ";
@@ -81,6 +84,6 @@ class __TwigTemplate_90f0fbfc3b82dbdc0630f8101c6848170fae6e2627a285df8d6368f6dd2
 
     public function getDebugInfo()
     {
-        return array (  67 => 16,  63 => 14,  44 => 12,  40 => 11,  31 => 4,  28 => 3,);
+        return array (  69 => 17,  67 => 16,  63 => 14,  44 => 12,  40 => 11,  31 => 4,  28 => 3,);
     }
 }

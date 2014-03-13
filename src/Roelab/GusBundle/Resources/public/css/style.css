@@ -134,10 +134,10 @@ ul.sdt_menu li div.sdt_box a:hover{
 }
 
 div.feedWidget{
-    z-index:-1;
+    z-index:0;
 }
 div.activeTab{
-    z-index:-1;
+    z-index:0;
 }
 #feedWidget{
     background:url(bg.png) repeat-x #47525c;
@@ -149,7 +149,7 @@ div.activeTab{
 
     /* Remains hidden if JS is not enabled: */
     display:none;
-    z-index:-1;
+    z-index:0;
 }
 
 #activeTab.hover,.dropDownList{
